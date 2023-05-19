@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 
-{% block title %}Names Entity Recognition{% endblock %}
+{% block title %}PII Detection{% endblock %}
 {% block head %}
 {{ super() }}
 {% endblock %}
@@ -14,7 +14,7 @@
         <div class="col">
             <div class="card" style="width: 64em;">
                 <div class="card-body">
-                    <h3 class="card-title text-center">Named Entity Recognition</h3>
+                    <h3 class="card-title text-center">PII detection</h3>
                     <form method="post">
                         <div class="container">
                             <div class="row p-1">
@@ -25,11 +25,12 @@
                                 </div>
                             </div>
                             <div class="row p-1">
-                                <button type="submit" class="btn btn-primary" style="width: 12em;">Detect entities</button>
+                                <button type="submit" class="btn btn-primary" style="width: 12em;">Detect PII</button>
                             </div>
                             {% if data.entities|length %}
                             <div class="row p-1 pt-4">
-                                <h4>Entities</h4>
+                                <h4>Redacted text</h4>
+                                <p>{{data.redacted_text}}</p>
                             </div>
                             <div class="row p-2 justify-content-center">
                                 {% for entity in data.entities %}
@@ -38,7 +39,6 @@
                                         <div class="card-body">
                                             <h4 class="card-title text-center">{{entity.name}}</h4>
                                             <p class="card-text">Category: {{entity.category}}</p>
-                                            <p class="card-text">SubCategory: {{entity.subcategory}}</p>
                                         </div>
                                     </div>
                                 </div>

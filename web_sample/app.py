@@ -170,6 +170,31 @@ def key_phrase_extraction() -> str:
 
     return render_template('key_phrase_extraction.html', data=data)
 
+@app.route('/pii_detection', methods=['GET', 'POST'])
+def pii_detection() -> str:
+    data = {
+        'document': '',
+        'redacted_text': '',
+        'entities': []
+    }
+
+    if request.method == "POST" and 'documentEntry' in request.form:
+        data['document'] = request.form.get('documentEntry')
+
+        pii_result = text_analytics_client.recognize_pii_entities(documents = [data['document']])[0]
+
+        data['redacted_text'] = pii_result.redacted_text
+
+        for entity in pii_result.entities:
+            entity_card = {
+                "name": entity.text,
+                "category": entity.category,
+            }
+            data['entities'].append(entity_card)
+
+    return render_template('pii_detection.html', data=data)
+
+
 @app.route('/')
 def home() -> str:
     return render_template('index.html')
