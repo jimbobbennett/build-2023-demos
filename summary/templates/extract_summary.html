@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+
+{% block title %}Summaries{% endblock %}
+{% block head %}
+{{ super() }}
+{% endblock %}
+{% block content %}
+<div class="container">
+    <div class="row p-1">
+    </div>
+    <div class="row justify-content-center p-1">
+        <div class="col">
+        </div>
+        <div class="col">
+            <div class="card" style="width: 64em;">
+                <div class="card-body">
+                    <h3 class="card-title text-center">Summarize text using Extractive summarization</h3>
+                    <form method="post">
+                        <div class="container">
+                            <div class="row p-1">
+                                <textarea id="documentEntry" name="documentEntry" rows="24"
+                                    placeholder="Paste the document to sumarize here">{{ data.document }}</textarea>
+                                <div id="the-count">
+                                    <span>{{data.documentCount}}</span>
+                                </div>
+                            </div>
+                            <div class="row p-1">
+                                <button type="submit" class="btn btn-primary" style="width: 12em;">Summarize</button>
+                            </div>
+                            <div class="row p-2">
+                                {% if data.summary|length %}
+                                <h5>Summary</h5>
+                                <p>{{ data.summary }}</p>
+                                <div id="the-count">
+                                    <span>{{data.summaryCount}}</span>
+                                </div>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+        </div>
+    </div>
+</div>
+
+{% endblock %}

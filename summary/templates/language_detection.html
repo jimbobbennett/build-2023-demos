@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+
+{% block title %}Language detection{% endblock %}
+{% block head %}
+{{ super() }}
+{% endblock %}
+{% block content %}
+<div class="container">
+    <div class="row p-1">
+    </div>
+    <div class="row justify-content-center p-1">
+        <div class="col">
+        </div>
+        <div class="col">
+            <div class="card" style="width: 64em;">
+                <div class="card-body">
+                    <h3 class="card-title text-center">Detect language</h3>
+                    <form method="post">
+                        <div class="container">
+                            <div class="row p-1">
+                                <textarea id="documentEntry" name="documentEntry" rows="24"
+                                    placeholder="Paste the document detect the language for">{{ data.document }}</textarea>
+                            </div>
+                            <div class="row p-1">
+                                <button type="submit" class="btn btn-primary" style="width: 12em;">Detect language</button>
+                            </div>
+                            <div class="row p-2">
+                                {% if data.language|length %}
+                                <h5>Language</h5>
+                                <p>{{ data.language }}</p>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+        </div>
+    </div>
+</div>
+
+{% endblock %}
