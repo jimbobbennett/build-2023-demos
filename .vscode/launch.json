@@ -5,12 +5,12 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "Python: Flask",
+            "name": "Web sample",
             "type": "python",
             "request": "launch",
             "module": "flask",
             "env": {
-                "FLASK_APP": "summary/app.py",
+                "FLASK_APP": "web_sample/app.py",
                 "FLASK_DEBUG": "1"
             },
             "args": [
