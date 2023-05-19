@@ -40,8 +40,8 @@
                             </div>
                             <div class="row p-2 justify-content-start">
                                 {% for opinion in sentence.opinions %}
-                                <div class="col m-1">
-                                    <div class="card h-100" style="width: 18rem;">
+                                <div class="col-4 m-1">
+                                    <div class="card h-100">
                                         <div class="card-body">
                                             <h4 class="card-title text-center">{{opinion.target}}</h4>
                                             <p class="card-text">Sentiment: {{opinion.target_sentiment}}</p>

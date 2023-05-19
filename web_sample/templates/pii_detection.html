@@ -32,10 +32,10 @@
                                 <h4>Redacted text</h4>
                                 <p>{{data.redacted_text}}</p>
                             </div>
-                            <div class="row p-2 justify-content-center">
+                            <div class="row p-2 justify-content-start">
                                 {% for entity in data.entities %}
-                                <div class="col m-1 mt-3">
-                                    <div class="card h-100" style="width: 18rem;">
+                                <div class="col-4 m-1 mt-3">
+                                    <div class="card h-100">
                                         <div class="card-body">
                                             <h4 class="card-title text-center">{{entity.name}}</h4>
                                             <p class="card-text">Category: {{entity.category}}</p>

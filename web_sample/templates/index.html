@@ -7,70 +7,101 @@
 {% block content %}
 <div class="container">
     <div class="row p-5">
-        <h2 class="text-center">Microsoft Learn paths to learn the Azure Language services</h2>
-    </div>
-    <div class="row p-1">
+        <div class="col"></div>
         <div class="col">
+            <div class="card text-bg-primary p-1">
+                <img class="card-img-top" src="{{ url_for('static', filename='qrcode_learn.microsoft.com.png') }}" />
+            </div>
         </div>
+        <div class="col"></div>
+    </div>
+    <div class="row text-center">
         <div class="col">
-            <div class="card h-100" style="width: 18rem;">
-                <img src="https://learn.microsoft.com/en-us/training/achievements/1-create-custom-text-classification-solutions.svg" style="width: 10rem;" class="card-img-top mx-auto d-block mt-2" alt="Logo">
+            <h1>Documentation and Training</h1>
+        </div>
+    </div>
+    <div class="row justify-content-start">
+        <div class="col-4">
+            <div class="card h-100" >
+                <img src="{{ url_for('static', filename='BIT_DOCS.svg') }}"
+                    style="width: 10rem;" class="card-img-top mx-auto d-block mt-2" alt="Logo">
+                <div class="card-body">
+                    <h4 class="card-title">Azure Cognitive Service for Language documentation</h4>
+                    <p class="card-text">Learn how to integrate AI into your applications that can extract information, classify text, understand conversational language, answer questions and more.</p>
+                </div>
+                <div class="card-footer">
+                    <a href="https://learn.microsoft.com/azure/cognitive-services/language-service/"
+                        class="btn btn-primary mx-auto d-block" target="_blank">Read the docs</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-4">
+            <div class="card h-100" >
+                <img src="https://learn.microsoft.com/en-us/training/achievements/1-create-custom-text-classification-solutions.svg"
+                    style="width: 10rem;" class="card-img-top mx-auto d-block mt-2" alt="Logo">
                 <div class="card-body">
                     <h4 class="card-title">Create custom text classification solutions</h4>
-                    <p class="card-text">The Language service within Azure Cognitive Services enables processing of natural language to use in your own app. Learn how to build a custom text classification project.</p>
+                    <p class="card-text">The Language service within Azure Cognitive Services enables processing
+                        of natural language to use in your own app. Learn how to build a custom text
+                        classification project.</p>
                 </div>
                 <div class="card-footer">
-                    <a href="https://learn.microsoft.com/training/modules/custom-text-classification/" class="btn btn-primary mx-auto d-block" target="_blank">Start the module</a>
+                    <a href="https://learn.microsoft.com/training/modules/custom-text-classification/"
+                        class="btn btn-primary mx-auto d-block" target="_blank">Start the module</a>
                 </div>
             </div>
         </div>
-        <div class="col">
-            <div class="card h-100" style="width: 18rem;">
-                <img src="https://learn.microsoft.com/en-us/training/achievements/2-custom-name-entity-recognition.svg" style="width: 10rem;" class="card-img-top mx-auto d-block mt-2" alt="Logo">
+        <div class="col-4">
+            <div class="card h-100" >
+                <img src="https://learn.microsoft.com/en-us/training/achievements/2-custom-name-entity-recognition.svg"
+                    style="width: 10rem;" class="card-img-top mx-auto d-block mt-2" alt="Logo">
                 <div class="card-body">
                     <h4 class="card-title">Custom named entity recognition</h4>
-                    <p class="card-text">Build a custom entity recognition solution to extract entities from unstructured documents.</p>
+                    <p class="card-text">Build a custom entity recognition solution to extract entities from
+                        unstructured documents.</p>
                 </div>
                 <div class="card-footer">
-                    <a href="https://learn.microsoft.com/training/modules/custom-name-entity-recognition/" class="btn btn-primary mx-auto d-block" target="_blank">Start the module</a>
+                    <a href="https://learn.microsoft.com/training/modules/custom-name-entity-recognition/"
+                        class="btn btn-primary mx-auto d-block" target="_blank">Start the module</a>
                 </div>
             </div>
         </div>
+    </div>
+    <div class="row pt-5 text-center">
         <div class="col">
+            <h1>Certifications</h1>
         </div>
     </div>
-    <div class="row p-5">
-        <h2 class="text-center">Microsoft Certifications</h2>
-    </div>
-    <div class="row p-1">
-        <div class="col">
-        </div>
-        <div class="col">
-            <div class="card h-100" style="width: 18rem;">
-                <img src="https://learn.microsoft.com/en-us/media/learn/certification/badges/certification-exam.svg" style="width: 10rem;" class="card-img-top mx-auto d-block mt-2" alt="Logo">
+    <div class="row justify-content-start">
+        <div class="col-4">
+            <div class="card h-100">
+                <img src="https://learn.microsoft.com/en-us/media/learn/certification/badges/certification-exam.svg"
+                    style="width: 10rem;" class="card-img-top mx-auto d-block mt-2" alt="Logo">
                 <div class="card-body">
                     <h4 class="card-title">AI-102</h4>
                     <p class="card-text">Designing and Implementing a Microsoft Azure AI Solution</p>
                 </div>
                 <div class="card-footer">
-                    <a href="https://learn.microsoft.com/certifications/exams/ai-102/" class="btn btn-primary mx-auto d-block" target="_blank">Learn more</a>
+                    <a href="https://learn.microsoft.com/certifications/exams/ai-102/"
+                        class="btn btn-primary mx-auto d-block" target="_blank">Learn more</a>
                 </div>
             </div>
         </div>
-        <div class="col">
-            <div class="card h-100" style="width: 18rem;">
-                <img src="https://learn.microsoft.com/en-us/media/learn/certification/badges/certification-exam.svg" style="width: 10rem;" class="card-img-top mx-auto d-block mt-2" alt="Logo">
+        <div class="col-4">
+            <div class="card h-100">
+                <img src="https://learn.microsoft.com/en-us/media/learn/certification/badges/certification-exam.svg"
+                    style="width: 10rem;" class="card-img-top mx-auto d-block mt-2" alt="Logo">
                 <div class="card-body">
                     <h4 class="card-title">AI-900</h4>
                     <p class="card-text">Microsoft Azure AI Fundamentals.</p>
                 </div>
                 <div class="card-footer">
-                    <a href="https://learn.microsoft.com/certifications/exams/ai-900/" class="btn btn-primary mx-auto d-block" target="_blank">Learn more</a>
+                    <a href="https://learn.microsoft.com/certifications/exams/ai-900/"
+                        class="btn btn-primary mx-auto d-block" target="_blank">Learn more</a>
                 </div>
             </div>
         </div>
-        <div class="col">
-        </div>
+
     </div>
 </div>
 
