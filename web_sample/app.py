@@ -34,13 +34,13 @@ def create_abstractive_summary(document: str) -> str:
     full_summary = ''
 
     for result in abstractive_summary_results:
-        if result.kind == "AbstractiveSummarization":
+        if result.kind == 'AbstractiveSummarization':
             # If we have summaries, add them to the overall summary
             for summary in result.summaries:
                 full_summary += summary.text
         elif result.is_error is True:
             # If we have an error, return the error
-            return f"Error with code '{result.error.code}' and message '{result.error.message}'"
+            return f'Error with code {result.error.code} and message {result.error.message}'
     
     return full_summary
 
@@ -62,13 +62,13 @@ def create_extractive_summary(document: str) -> str:
     full_summary = ''
 
     for result in extractive_summary_results:
-        if result.kind == "ExtractiveSummarization":
+        if result.kind == 'ExtractiveSummarization':
             # If we have summaries, add them to the overall summary
             for sentence in result.sentences:
                 full_summary += sentence.text
         elif result.is_error is True:
             # If we have an error, return the error
-            return f"Error with code '{result.error.code}' and message '{result.error.message}'"
+            return f'Error with code {result.error.code} and message {result.error.message}'
     
     return full_summary
 
@@ -80,7 +80,7 @@ def summarization(template: str, summary_func) -> str:
         'summaryCount': ''
     }
 
-    if request.method == "POST" and 'documentEntry' in request.form:
+    if request.method == 'POST' and 'documentEntry' in request.form:
         data['document'] = request.form.get('documentEntry')
         data['documentCount'] = f'{len(data["document"])} characters'
         data['summary'] = summary_func(data['document'])
@@ -103,7 +103,7 @@ def language_detection() -> str:
         'lamguage': ''
     }
 
-    if request.method == "POST" and 'documentEntry' in request.form:
+    if request.method == 'POST' and 'documentEntry' in request.form:
         data['document'] = request.form.get('documentEntry')
         data['language'] = text_analytics_client.detect_language([data['document']])[0].primary_language.name
 
@@ -116,16 +116,16 @@ def entity_linking() -> str:
         'entities': []
     }
 
-    if request.method == "POST" and 'documentEntry' in request.form:
+    if request.method == 'POST' and 'documentEntry' in request.form:
         data['document'] = request.form.get('documentEntry')
 
         entities_result = text_analytics_client.recognize_linked_entities(documents = [data['document']])[0]
 
         for entity in entities_result.entities:
             entity_card = {
-                "name": entity.name,
-                "url": entity.url,
-                "data_source": entity.data_source,
+                'name': entity.name,
+                'url': entity.url,
+                'data_source': entity.data_source,
             }
             data['entities'].append(entity_card)
 
@@ -138,16 +138,16 @@ def named_entity_recognition() -> str:
         'entities': []
     }
 
-    if request.method == "POST" and 'documentEntry' in request.form:
+    if request.method == 'POST' and 'documentEntry' in request.form:
         data['document'] = request.form.get('documentEntry')
 
         entities_result = text_analytics_client.recognize_entities(documents = [data['document']])[0]
 
         for entity in entities_result.entities:
             entity_card = {
-                "name": entity.text,
-                "category": entity.category,
-                "subcategory": entity.subcategory,
+                'name': entity.text,
+                'category': entity.category,
+                'subcategory': entity.subcategory,
             }
             data['entities'].append(entity_card)
 
@@ -160,7 +160,7 @@ def key_phrase_extraction() -> str:
         'key_phrases': []
     }
 
-    if request.method == "POST" and 'documentEntry' in request.form:
+    if request.method == 'POST' and 'documentEntry' in request.form:
         data['document'] = request.form.get('documentEntry')
 
         key_phrases_result = text_analytics_client.extract_key_phrases(documents = [data['document']])[0]
@@ -178,7 +178,7 @@ def pii_detection() -> str:
         'entities': []
     }
 
-    if request.method == "POST" and 'documentEntry' in request.form:
+    if request.method == 'POST' and 'documentEntry' in request.form:
         data['document'] = request.form.get('documentEntry')
 
         pii_result = text_analytics_client.recognize_pii_entities(documents = [data['document']])[0]
@@ -187,13 +187,49 @@ def pii_detection() -> str:
 
         for entity in pii_result.entities:
             entity_card = {
-                "name": entity.text,
-                "category": entity.category,
+                'name': entity.text,
+                'category': entity.category,
             }
             data['entities'].append(entity_card)
 
     return render_template('pii_detection.html', data=data)
 
+@app.route('/sentiment_analysis', methods=['GET', 'POST'])
+def sentiment_analysis() -> str:
+    data = {
+        'document': '',
+        'overall_sentiment': '',
+        'overall_scores': '',
+        'sentences': []
+    }
+
+    if request.method == 'POST' and 'documentEntry' in request.form:
+        data['document'] = request.form.get('documentEntry')
+
+        sentiment_result = text_analytics_client.analyze_sentiment(documents = [data['document']], show_opinion_mining=True)[0]
+
+        data['overall_sentiment'] = f'Sentiment: {sentiment_result.sentiment}'
+        data['overall_scores'] = f'Positive: {sentiment_result.confidence_scores.positive:.2f} | Neutral: {sentiment_result.confidence_scores.neutral:.2f} | Negative: {sentiment_result.confidence_scores.negative:.2f}'
+
+        for sentence in sentiment_result.sentences:
+            entity_card = {
+                'sentence': sentence.text,
+                'sentence_sentiment': f'Sentiment: {sentence.sentiment}',
+                'sentence_score': f'Positive: {sentence.confidence_scores.positive:.2f} | Neutral: {sentence.confidence_scores.neutral:.2f} | Negative: {sentence.confidence_scores.negative:.2f}',
+                'opinions': []
+            }
+
+            for opinion in sentence.mined_opinions:
+                entity_card['opinions'].append({
+                    'target': opinion.target.text,
+                    'target_sentiment': opinion.target.sentiment,
+                    'target_score': f'Positive: {opinion.target.confidence_scores.positive:.2f} | Neutral: {opinion.target.confidence_scores.neutral:.2f} | Negative: {opinion.target.confidence_scores.negative:.2f}',
+                    'assessment': opinion.assessments[0].text
+                })
+
+            data['sentences'].append(entity_card)
+
+    return render_template('sentiment_analysis.html', data=data)
 
 @app.route('/')
 def home() -> str:

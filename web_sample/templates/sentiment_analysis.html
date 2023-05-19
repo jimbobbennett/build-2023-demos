@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 
-{% block title %}Entity Linking{% endblock %}
+{% block title %}Sentiment Analysis{% endblock %}
 {% block head %}
 {{ super() }}
 {% endblock %}
@@ -14,38 +14,44 @@
         <div class="col">
             <div class="card" style="width: 64em;">
                 <div class="card-body">
-                    <h3 class="card-title text-center">Entity linking</h3>
+                    <h3 class="card-title text-center">Sentiment Analysis and Opinion Mining</h3>
                     <form method="post">
                         <div class="container">
                             <div class="row p-1">
                                 <textarea id="documentEntry" name="documentEntry" rows="12"
-                                    placeholder="Paste the document to detect entities for here">{{ data.document }}</textarea>
+                                    placeholder="Paste the document to analyze here">{{ data.document }}</textarea>
                                 <div id="the-count">
                                     <span>{{data.documentCount}}</span>
                                 </div>
                             </div>
                             <div class="row p-1">
-                                <button type="submit" class="btn btn-primary" style="width: 12em;">Detect entities</button>
+                                <button type="submit" class="btn btn-primary" style="width: 12em;">Analyze
+                                    Sentiment</button>
                             </div>
-                            {% if data.entities|length %}
+                            {% if data.sentences|length %}
                             <div class="row p-1 pt-4">
-                                <h4>Entities</h4>
+                                <h4>Overall sentiment</h4>
+                                <p>{{data.overall_sentiment}}. {{data.overall_scores}}</p>
                             </div>
-                            <div class="row p-2 justify-content-center">
-                                {% for entity in data.entities %}
-                                <div class="col m-1 mt-3">
+                            {% for sentence in data.sentences %}
+                            <div class="row p-2">
+                                <h5>Sentence: {{sentence.sentence}}</h5>
+                                <p> {{sentence.sentence_sentiment}}. {{sentence.sentence_score}}</p>
+                            </div>
+                            <div class="row p-2 justify-content-start">
+                                {% for opinion in sentence.opinions %}
+                                <div class="col m-1">
                                     <div class="card h-100" style="width: 18rem;">
                                         <div class="card-body">
-                                            <h4 class="card-title text-center">{{entity.name}}</h4>
-                                            <p class="card-text">Source: {{entity.data_source}}</p>
-                                        </div>
-                                        <div class="card-footer">
-                                            <a href="{{entity.url}}" class="btn btn-primary mx-auto d-block" target="_blank">Details</a>
+                                            <h4 class="card-title text-center">{{opinion.target}}</h4>
+                                            <p class="card-text">Sentiment: {{opinion.target_sentiment}}</p>
+                                            <p class="card-text">Assessment: {{opinion.assessment}}</p>
                                         </div>
                                     </div>
                                 </div>
                                 {% endfor %}
                             </div>
+                            {% endfor %}
                             {% endif %}
                         </div>
                     </form>
