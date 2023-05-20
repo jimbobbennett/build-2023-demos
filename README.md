@@ -23,4 +23,4 @@ This sample is a web app that demonstrates the different language services. The 
 
     `flask run`
 
-The web server will start up and host the site. You can then navigate to the different tabs to test out the 
+The web server will start up and host the site. You can then navigate to the different tabs to test out the different language services.
